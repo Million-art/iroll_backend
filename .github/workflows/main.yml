@@ -1,15 +1,35 @@
-- name: FTP Deployer
-  branch: main
-  uses: million-art@iroll.dirtechsolution.com/ftp-deployer@v1.8
-  with:
-    sftp: false # optional
-    host: ${{ secrets.FTP_HOST }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
-    port: 21 # optional, default is: 21
-    username: ${{ secrets.FTP_USERNAME }} # FTP username
-    password: ${{ secrets.FTP_PASSWORD }} # FTP password
-    remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }} # optional, remote path of your FTP server
-    local_folder: dist # optional, local path, default is: dist
-    cleanup: false # optional, remove existing files inside FTP remote folder
-    include: '[]' # optional, e.g. '['dist']'
-    exclude: '[]' # optional, e.g. '['node_modules/**', '.git/**', '*.env']'
-    passive: true # optional
+# .github/workflows/main.yml
+name: FTP Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: FTP Deployer
+      uses: ./github/actions/main
+      with:
+        sftp: false
+        host: ${{ secrets.FTP_HOST }}
+        port: 21
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }}
+        local_folder: dist
+        cleanup: false
+        include: '[]'
+        exclude: '[]'
+        passive: true
