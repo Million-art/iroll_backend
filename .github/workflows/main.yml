@@ -1,6 +1,6 @@
 - name: FTP Deployer
   branch: main
-  uses: million-art@iroll.dirtechsolution.com/ftp-deployer@v1.8
+  uses: actions/checkout@v2
   with:
     sftp: false # optional
     host: ${{ secrets.FTP_HOST }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
