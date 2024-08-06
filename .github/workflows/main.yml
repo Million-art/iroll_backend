@@ -30,6 +30,6 @@ jobs:
         remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }}
         local_folder: .
         cleanup: false
-        include: '[]'
+        include: '["/**"]'
         exclude: '[]'
         passive: true
