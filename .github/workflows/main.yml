@@ -1,26 +1,15 @@
-# .github/workflows/main.yml
-name: FTP Deployment
-
-on:
-  push:
-    branches:
-      - main
-
+on: push
+name: 🚀 Deploy website on push
 jobs:
-  deploy:
+  web-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    - name: FTP Deployer
-      uses: sand4rt/ftp-deployer@v1.8
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         sftp: false
         host: ${{ secrets.FTP_HOST }}
@@ -28,8 +17,4 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }}
-        local_folder: ./iroll.dirtechsolution.com/
-        cleanup: false
-        include: '["/**"]'
-        exclude: '[]'
-        passive: true
+        local_folder: iroll_backend/
