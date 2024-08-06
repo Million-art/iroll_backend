@@ -14,4 +14,4 @@ jobs:
         server: ftp.dirtechsolution.com
         username: ${{ secrets.ftp_username }}
         password: ${{ secrets.ftp_password }}
-        remote_folder: /iroll.dirtechsolution.com/backend/
+        remote_folder: /home/dirtecjs/iroll.dirtechsolution.com/backend/
