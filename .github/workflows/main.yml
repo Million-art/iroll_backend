@@ -18,39 +18,9 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '14'
-# .github/workflows/main.yml
-name: FTP Deployment
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
 
     - name: FTP Deployer
       uses: sand4rt/ftp-deployer@v1.8
-      with:
-        sftp: false
-        host: ${{ secrets.FTP_HOST }}
-        port: 21
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }}
-        local_folder: dist
-        cleanup: false
-        include: '[]'
-        exclude: '[]'
-        passive: true
-
-    - name: FTP Deployer
-      uses: ./github/actions/main
       with:
         sftp: false
         host: ${{ secrets.FTP_HOST }}
